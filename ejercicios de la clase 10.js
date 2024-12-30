@@ -24,5 +24,4 @@ let edad = parseInt(prompt("Ingresa tu edad: "));
 if (edad >= EDAD_MINIMA && edad <= EDAD_MAXIMA) {
     console.log("Tu edad está dentro del rango permitido.");
 } else {
-    console.log("Tu edad está fuera del rango permitido.");
-}
+    console.log("Tu edad está fuera del rango permitido.
