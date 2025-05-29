@@ -1,0 +1,25 @@
+{
+  "info": {
+    "name": "Base de datos de libros",
+    "version": "1.0.0",
+    "total": 3
+  },
+  "quotes": [
+    {
+      "id": "1",
+      "text": "En cambio ",
+      "autor": "Estanislao bachrach"
+    },
+    {
+      "id": "2",
+      "text": "Agilmente",
+      "autor": "Estanislao bachrach" "
+    },
+    {
+      "id": "3"
+      "text": "Zensorial",
+      "autor": "Estanislao bachrach",
+    
+    }
+  ]
+}
