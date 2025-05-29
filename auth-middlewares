@@ -1,0 +1,11 @@
+import express, { Request, Response, NextFunction } from 'express'
+//importa express y los tipos necesarios para manejar solicitudes 
+
+export const authMiddleware = (req: Request, res: Response, next: NextFunction): void => {  // define y exporta una función middleware
+    const token = req.headers['authorization']
+    if (!token || token !== 'Bearer my-secret-token') {
+        res.status(401).json({error: 'No autorizado'})
+        return  //verifica si no hay un token o si el token no coincide con lo esperado
+    }
+    next() // si la autenticación es correcto pasa al controlador
+}
