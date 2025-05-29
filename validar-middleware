@@ -1,0 +1,9 @@
+if (!text || typeof text !== 'string') {
+  res.status(400).json({error: "El campo 'text' se requiere y debe ser string"})
+        return  // valida que text exista y sea de tipo string
+    }
+    if (!autor || typeof autor !== 'string') {  // valida que author exista y sea de tipo string
+      res.status(400).json({error: "El campo 'autor' se requiere y debe ser string"})
+        return
+    }
+    next()
