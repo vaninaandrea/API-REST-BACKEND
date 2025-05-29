@@ -1,0 +1,68 @@
+import fs from 'fs'
+import path from 'path'
+
+/ archivo JSON ,base de datos
+const filePath = path.join(__dirname, '../database/quotes.json')
+
+// Estructura de una frase (quote)
+interface Quote {
+  id: string
+  text: string
+  autor: string
+}
+
+export class QuotesModel {
+  // Obtener todas las frases
+  static getAllQuotes(): Quote[] {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    return data.quotes
+  }
+
+  // Buscar una frase por id
+  static getQuotesById(id: string): Quote | undefined {
+    const quotes = this.getAllQuotes()
+    return quotes.find((quote) => quote.id === id)
+  }
+
+  // Agregar una nueva frase
+  static addQuote(newQuote: Omit<Quote, 'id'>): Quote {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+
+    const newId = (data.quotes.length + 1).toString()
+    const quote: Quote = { ...newQuote, id: newId }
+
+    data.quotes.push(quote)
+    data.info.total += 1
+
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
+    return quote
+  }
+
+  // Actualizar una frase existente
+
+
+  static updateQuote(id: string, updatedData: Partial<Quote>): Quote | null {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    const index = data.quotes.findIndex((quote: Quote) => quote.id === id)
+    if (index === -1) return null
+
+    // Actualizar campos específicos , se mantienen las anteriores
+    data.quotes[index] = { ...data.quotes[index], ...updatedData }
+
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
+    return data.quotes[index]
+  }
+
+  // Eliminar una frase por id
+  static deleteQuote(id: string): boolean {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    const index = data.quotes.findIndex((quote: Quote) => quote.id === id)
+    if (index === -1) return false
+
+    data.quotes.splice(index, 1)
+    data.info.total -= 1
+
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
+    return true
+  }
+}
