@@ -1,0 +1,7 @@
+import express, { Request, Response, NextFunction } from 'express' // importa express y sus tipos(nextfunction,respinse,request)
+
+export const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction): void => { 
+ //declara y exporta un middleware llamado errorMiddleware coon sus cuatro parámetros
+    console.error('Error: ', err.message)
+    res.status(500).json({error: "Ocurrio un error en el servidor"})   // envia la rta. al cliente
+}
