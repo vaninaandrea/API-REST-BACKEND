@@ -1,0 +1,28 @@
+import { Router } from 'express'
+
+// controladores
+
+import {
+  getAllQuotes,
+  getQuotesById,
+  createQuotes,
+  updateQuotes,
+  deleteQuotes
+} from '../controllers/quotes-controllers'
+
+// middlewares
+
+import { validateQuote } from '../middlewares/validate-middleware'
+
+// Crear una instancia de router
+const router: Router = Router()
+
+router.get('/:id', getQuotesById
+router.post('/', validateQuote, createQuotes)
+router.patch('/:id', updateQuotes)
+
+router.delete('/:id', deleteQuotes)
+
+// exportar router para su uso en app.ts
+
+export default router
